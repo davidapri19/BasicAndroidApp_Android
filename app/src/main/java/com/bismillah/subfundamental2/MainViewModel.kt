@@ -17,7 +17,7 @@ class MainViewModel:ViewModel() {
         var users = arrayListOf<User>()
         val client = AsyncHttpClient()
         val url = "https://api.github.com/search/users?q=${usernameku}"
-        client.addHeader("Authorization","token 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")
+        client.addHeader("Authorization","token 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")
         client.addHeader("User-Agent","request")
         client.get(url, object: AsyncHttpResponseHandler(){
             override fun onSuccess(statusCode: Int, headers: Array<out Header>?, responseBody: ByteArray) {
@@ -49,7 +49,7 @@ class MainViewModel:ViewModel() {
         var users = arrayListOf<User>()
         val client = AsyncHttpClient()
         val url = "https://api.github.com/users/${names}/followers"
-        client.addHeader("Authorization","token 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")
+        client.addHeader("Authorization","token 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")
         client.addHeader("User-Agent","request")
         client.get(url, object: AsyncHttpResponseHandler(){
             override fun onSuccess(statusCode: Int, headers: Array<out Header>?, responseBody: ByteArray) {
@@ -80,7 +80,7 @@ class MainViewModel:ViewModel() {
         var users = arrayListOf<User>()
         val client = AsyncHttpClient()
         val url = "https://api.github.com/users/${names}/following"
-        client.addHeader("Authorization","token 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")
+        client.addHeader("Authorization","token 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")
         client.addHeader("User-Agent","request")
         client.get(url, object: AsyncHttpResponseHandler(){
             override fun onSuccess(statusCode: Int, headers: Array<out Header>?, responseBody: ByteArray) {

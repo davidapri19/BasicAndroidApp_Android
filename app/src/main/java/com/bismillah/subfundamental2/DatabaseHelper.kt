@@ -14,17 +14,14 @@ internal class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATA
         private const val SQL_CREATE_TABLE_USER = "CREATE TABLE $TABLE_NAME" +
                 " (${DatabaseContract.UserColumns.ID} INTEGER PRIMARY KEY," +
                 " ${DatabaseContract.UserColumns.PHOTO} TEXT NOT NULL," +
-                " ${DatabaseContract.UserColumns.USERNAME} TEXT NOT NULL"
+                " ${DatabaseContract.UserColumns.USERNAME} TEXT NOT NULL)"}
+
+    override fun onCreate(db: SQLiteDatabase?) {
+        db?.execSQL(SQL_CREATE_TABLE_USER)
     }
-    override fun onCreate(db: SQLiteDatabase) {
-        if (db != null) {
-            db.execSQL(SQL_CREATE_TABLE_USER)
-        }
-    }
-    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        if (db != null) {
-            db.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
-        }
+
+    override fun onUpgrade(db: SQLiteDatabase?, p1: Int, p2: Int) {
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE_NAME")
         onCreate(db)
     }
 }

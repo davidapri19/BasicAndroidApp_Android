@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.StringRes
+import com.bismillah.subfundamental2.DatabaseContract.UserColumns.Companion.CONTENT_URI
 import com.bismillah.subfundamental2.databinding.ActivityDetailBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -25,6 +26,9 @@ class DetailActivity : AppCompatActivity() {
     var statusFavorite = false
     //untuk database
     private lateinit var userHelper: UserHelper
+    private lateinit var favoriteList: ArrayList<User>
+    //private val userItems = User()
+
 
     companion object {
         const val EXTRA_USER = "extra_user"
@@ -44,7 +48,6 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         userHelper = UserHelper.getInstance(applicationContext)
         userHelper.open()
 
@@ -58,12 +61,6 @@ class DetailActivity : AppCompatActivity() {
         }.attach()
         setStatusfavorite(statusFavorite)
         getDetailUser(user)
-
-
-
-
-
-
     }
 
 
@@ -71,7 +68,7 @@ class DetailActivity : AppCompatActivity() {
 
         val client = AsyncHttpClient()
         val url = "https://api.github.com/users/${username}"
-            client.addHeader("Authorization","token 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")
+            client.addHeader("Authorization","token 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")
             client.addHeader("User-Agent","request")
             client.get(url, object : AsyncHttpResponseHandler() {
                 override fun onSuccess(statusCode: Int, headers: Array<Header>, responseBody: ByteArray) {
@@ -111,9 +108,16 @@ class DetailActivity : AppCompatActivity() {
     private fun setStatusfavorite(statusFavorite: Boolean){
         if(statusFavorite){
             binding.btnFavorite.setBackgroundResource(R.drawable.ic_favorite_red)
+           // val values = ContentValues()
+          //  values.put(DatabaseContract.UserColumns.USERNAME, userItems.username)
+          //  values.put(DatabaseContract.UserColumns.PHOTO, userItems.avatar)
+
+            //contentResolver.insert(CONTENT_URI, values)
+
         }
         else{
             binding.btnFavorite.setBackgroundResource(R.drawable.ic_favorite_grey)
+
         }
     }
 
